@@ -1,6 +1,7 @@
 package net.jwarren.workers.controller;
 
 import net.jwarren.workers.model.Job;
+import net.jwarren.workers.model.Worker;
 import net.jwarren.workers.service.AppropriateJobsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,4 +24,17 @@ public class WorkerController {
     List<Job> getAppropriateJobs(@PathVariable Long workerId) {
         return appropriateJobsFinderService.findAppropriateJobs(workerId);
     }
+
+    // TODO: remove test endpoint
+    @GetMapping("/workers")
+    List<Worker> getWorkers() {
+        return appropriateJobsFinderService.findAllWorkers();
+    }
+
+    // TODO: remove test endpoint
+    @GetMapping("/jobs")
+    List<Job> getJobs() {
+        return appropriateJobsFinderService.findAllJobs();
+    }
+
 }
