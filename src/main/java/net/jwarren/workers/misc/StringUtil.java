@@ -12,6 +12,9 @@ public class StringUtil {
      * @return The input word in Titlecase (first letter capitalised)
      */
     public static String toTitleCase(String word) {
+        if (word == null) {
+            return null;
+        }
         if (word.length() <= 1) {
             return word.toUpperCase();
         }
