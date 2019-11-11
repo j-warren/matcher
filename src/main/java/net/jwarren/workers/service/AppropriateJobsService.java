@@ -1,10 +1,10 @@
 package net.jwarren.workers.service;
 
-import net.jwarren.workers.misc.JobSorter;
 import net.jwarren.workers.misc.UpstreamException;
 import net.jwarren.workers.misc.WorkerNotFoundException;
 import net.jwarren.workers.model.Job;
 import net.jwarren.workers.model.Worker;
+import net.jwarren.workers.sorter.SatisfiesJobComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class AppropriateJobsService {
 
     private SwipeService swipeService;
 
-    private static final int MAXIMUM_RESULTS = 3;
+    private static final int DEFAULT_MAXIMUM_RESULTS = 3;
 
     @Autowired
     public AppropriateJobsService(SwipeService swipeService) {
@@ -25,6 +25,10 @@ public class AppropriateJobsService {
     }
 
     public List<Job> findAppropriateJobs(Integer workerId) throws WorkerNotFoundException, UpstreamException {
+        return findAppropriateJobs(workerId, DEFAULT_MAXIMUM_RESULTS);
+    }
+
+    public List<Job> findAppropriateJobs(Integer workerId, int maxResults) throws WorkerNotFoundException, UpstreamException {
         // These API results are not cached as we want the latest value each time
         List<Job> jobs = findAllJobs();
         Worker worker = findWorkerById(workerId);
@@ -34,8 +38,10 @@ public class AppropriateJobsService {
             return Collections.emptyList();
         }
 
-        JobSorter jobSorter = new JobSorter(worker);
-        return jobs.stream().sorted(jobSorter).limit(MAXIMUM_RESULTS).collect(Collectors.toList());
+        return jobs.stream()
+                .filter(j -> SatisfiesJobComparator.jobRequirementsDefinedAndWorkerSatisfies(worker, j))
+                .limit(maxResults)
+                .collect(Collectors.toList());
     }
 
     public List<Job> findAllJobs() throws UpstreamException {
