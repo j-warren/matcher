@@ -21,7 +21,7 @@ public class WorkerController {
     }
 
     @GetMapping("/jobsfor/{workerId}")
-    List<Job> getAppropriateJobs(@PathVariable Long workerId) {
+    List<Job> getAppropriateJobs(@PathVariable Integer workerId) {
         return appropriateJobsFinderService.findAppropriateJobs(workerId);
     }
 
