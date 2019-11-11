@@ -17,6 +17,8 @@ import static net.jwarren.workers.misc.StringUtil.parseCashAmount;
 
 @Data
 public class Job {
+    private String guid;
+    private Integer jobId;
     private Boolean driversLicenseRequired;
     private List<Certificate> requiredCertificates;
     private Location location;
@@ -26,8 +28,6 @@ public class Job {
     private String about;
     private String jobTitle;
     private String company;
-    private String guid;
-    private Integer jobId;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
 

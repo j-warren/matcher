@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 
 @Data
 public class Worker {
+    private String guid;
+    private Integer userId;
     private List<Certificate> certificates;
     private Address jobSearchAddress;
     private Transportation transportation;
     private Boolean hasDriversLicense;
     private Integer age;
-    private String guid;
-    private Integer userId;
     // TODO: Consider adding rating, isActive, skills, availability, phone, email, name
 
 
