@@ -37,8 +37,6 @@ public class Job {
      */
     @JsonCreator
     public Job(Map<String, Object> properties) {
-        LOGGER.debug("Job map:");
-        properties.keySet().forEach(LOGGER::debug);
 
         List<String> certificates = (List<String>) properties.getOrDefault("requiredCertificates", null);
         this.requiredCertificates = certificates != null ? certificates.stream().map(Certificate::new).collect(Collectors.toList()) : null;

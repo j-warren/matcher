@@ -1,5 +1,6 @@
 package net.jwarren.workers.advice;
 
+import net.jwarren.workers.misc.UpstreamException;
 import net.jwarren.workers.misc.WorkerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,6 +15,13 @@ public class WorkerAdvice {
     @ExceptionHandler(WorkerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     String workerNotFoundHandler(WorkerNotFoundException exception) {
+        return exception.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(UpstreamException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    String upstreamException(UpstreamException exception) {
         return exception.getMessage();
     }
 }

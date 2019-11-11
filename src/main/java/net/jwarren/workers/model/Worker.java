@@ -28,7 +28,7 @@ public class Worker {
         List<String> certificates = (List<String>) properties.getOrDefault("certificates", null);
         this.certificates = certificates == null ? null : certificates.stream().map(Certificate::new).collect(Collectors.toList());
 
-        Map<String, Object> jobSearchAddress = (Map<String, Object>) properties.getOrDefault("jobSearchAddress", null); // TODO
+        Map<String, Object> jobSearchAddress = (Map<String, Object>) properties.getOrDefault("jobSearchAddress", null);
         this.jobSearchAddress = new Address(jobSearchAddress);
 
         String transport = (String) properties.getOrDefault("transportation", null);
