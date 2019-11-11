@@ -4,7 +4,8 @@ import net.jwarren.workers.misc.UpstreamException;
 import net.jwarren.workers.misc.WorkerNotFoundException;
 import net.jwarren.workers.model.Job;
 import net.jwarren.workers.model.Worker;
-import net.jwarren.workers.sorter.SatisfiesJobComparator;
+import net.jwarren.workers.sorter.SatisfiesJob;
+import net.jwarren.workers.sorter.SatisfiesWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class AppropriateJobsService {
         }
 
         return jobs.stream()
-                .filter(j -> SatisfiesJobComparator.jobRequirementsDefinedAndWorkerSatisfies(worker, j))
+                .filter(job -> new SatisfiesJob().jobSatisfiesAllChecks(worker, job))
                 .limit(maxResults)
                 .collect(Collectors.toList());
     }
