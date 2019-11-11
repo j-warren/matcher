@@ -31,6 +31,20 @@ public class Job {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Job.class);
 
+    Job(Boolean driversLicenseRequired, List<Certificate> requiredCertificates, Location location, Float billRate, Integer workersRequired, LocalDateTime startDate, String about, String jobTitle, String company, String guid, Integer jobId) {
+        this.driversLicenseRequired = driversLicenseRequired;
+        this.requiredCertificates = requiredCertificates;
+        this.location = location;
+        this.billRate = billRate;
+        this.workersRequired = workersRequired;
+        this.startDate = startDate;
+        this.about = about;
+        this.jobTitle = jobTitle;
+        this.company = company;
+        this.guid = guid;
+        this.jobId = jobId;
+    }
+
     /**
      * Create a Job from a map
      * @param properties Properties Map of field names and values

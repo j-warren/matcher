@@ -19,6 +19,17 @@ public class Worker {
     private Integer userId;
     // TODO: Consider adding rating, isActive, skills, availability, phone, email, name
 
+
+    public Worker(List<Certificate> certificates, Address jobSearchAddress, Transportation transportation, Boolean hasDriversLicense, Integer age, String guid, Integer userId) {
+        this.certificates = certificates;
+        this.jobSearchAddress = jobSearchAddress;
+        this.transportation = transportation;
+        this.hasDriversLicense = hasDriversLicense;
+        this.age = age;
+        this.guid = guid;
+        this.userId = userId;
+    }
+
     /**
      * Create a Worker from a map
      * @param properties Properties Map of field names and values
