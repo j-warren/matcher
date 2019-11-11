@@ -14,6 +14,13 @@ public class Address {
     Double longitude;
     Double latitude;
 
+    public Address(Unit unit, Integer maxJobDistance, Double longitude, Double latitude) {
+        this.unit = unit;
+        this.maxJobDistance = maxJobDistance;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
     @JsonCreator
     public Address(Map<String, Object> properties) {
         String unitValue = (String) properties.getOrDefault("unit", null);

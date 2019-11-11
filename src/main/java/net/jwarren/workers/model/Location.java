@@ -16,6 +16,11 @@ public class Location {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Location.class);
 
+    public Location(Double longitude, Double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
     public Location(Map<String, String> properties) {
         this.longitude = doubleOrNull((String) properties.get("longitude"));
         this.latitude = doubleOrNull((String) properties.get("latitude"));
