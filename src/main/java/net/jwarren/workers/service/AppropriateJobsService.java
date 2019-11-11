@@ -4,6 +4,8 @@ import net.jwarren.workers.misc.UpstreamException;
 import net.jwarren.workers.misc.WorkerNotFoundException;
 import net.jwarren.workers.model.Job;
 import net.jwarren.workers.model.Worker;
+import net.jwarren.workers.sorter.JobPreferenceComparator;
+import net.jwarren.workers.sorter.JobPreferencePay;
 import net.jwarren.workers.sorter.SatisfiesJob;
 import net.jwarren.workers.sorter.SatisfiesWorker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +42,9 @@ public class AppropriateJobsService {
         }
 
         return jobs.stream()
-                .filter(job -> new SatisfiesJob().jobSatisfiesAllChecks(worker, job))
-                .filter(job -> new SatisfiesWorker().jobSatisfiesAllChecks(worker, job))
+                .filter(job -> new SatisfiesJob().jobSatisfiesAllChecks(worker, job) &&
+                        new SatisfiesWorker().jobSatisfiesAllChecks(worker, job))
+                .sorted(new JobPreferenceComparator(worker, new JobPreferencePay(), false))
                 .limit(maxResults)
                 .collect(Collectors.toList());
     }

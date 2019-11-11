@@ -1,5 +1,6 @@
 package net.jwarren.workers;
 
+import lombok.Data;
 import net.jwarren.workers.model.Certificate;
 import net.jwarren.workers.model.Job;
 import net.jwarren.workers.model.JobBuilder;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestUtil {
+    private static final Location BEIJING = new Location((double) 39.9288889f, (double) 116.3883333f);
+
     private static final JobBuilder staggeredJobBuilder = new JobBuilder()
             .setJobId(0)
             .setJobTitle("Title 0")
@@ -48,6 +51,20 @@ public class TestUtil {
                 .setLocation(location)
                 .setGuid(guid)
                 .createJob();
+    }
+
+    public static Job makeJobWithPayAndLocation(Float billRate, Location location, String guid) {
+        return staggeredJobBuilder
+                .setRequiredCertificates(new ArrayList<>())
+                .setDriversLicenseRequired(false)
+                .setBillRate(billRate)
+                .setLocation(location)
+                .setGuid(guid)
+                .createJob();
+    }
+
+    public static Location getBEIJING() {
+        return BEIJING;
     }
 
     public static <E> void addAll(Collection<E> collection, E... items) {
