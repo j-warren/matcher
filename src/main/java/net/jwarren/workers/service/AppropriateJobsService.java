@@ -41,6 +41,7 @@ public class AppropriateJobsService {
 
         return jobs.stream()
                 .filter(job -> new SatisfiesJob().jobSatisfiesAllChecks(worker, job))
+                .filter(job -> new SatisfiesWorker().jobSatisfiesAllChecks(worker, job))
                 .limit(maxResults)
                 .collect(Collectors.toList());
     }

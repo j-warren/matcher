@@ -30,4 +30,8 @@ public class Address {
         this.longitude = doubleOrNull((String) properties.getOrDefault("longitude", null));
         this.latitude = doubleOrNull((String) properties.getOrDefault("latitude", null));
     }
+
+    public Location getLocation() {
+        return new Location(longitude, latitude);
+    }
 }
