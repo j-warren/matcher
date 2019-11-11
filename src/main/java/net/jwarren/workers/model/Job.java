@@ -80,6 +80,7 @@ public class Job {
     }
 
     /**
+     * Warning: Jobs are considered the same if they have the same guid and jobId!
      * @param o Other object to compare
      * @return true iff parameter o has the same guid and userId
      */
