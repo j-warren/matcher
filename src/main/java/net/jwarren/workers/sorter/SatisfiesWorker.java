@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import static net.jwarren.workers.misc.CheckUtil.throwIfNull;
 
+/**
+ * Confirms that a job satisfies a worker
+ */
 public class SatisfiesWorker implements SatisfactionCheck {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SatisfiesWorker.class);
@@ -39,6 +42,13 @@ public class SatisfiesWorker implements SatisfactionCheck {
         return calcDistanceKm <= maxJobDistanceKm;
     }
 
+    /**
+     * Return the Haversine distance between two Locations, in metres
+     * @see https://lucene.apache.org/core/8_3_0/core/org/apache/lucene/util/SloppyMath.html
+     * @param location1 First location
+     * @param location2 Second Location
+     * @return Distance (in metres)
+     */
     private static double distanceMeters(Location location1, Location location2) {
         return SloppyMath.haversinMeters(location1.getLatitude(), location1.getLongitude(), location2.getLatitude(), location2.getLongitude());
     }
